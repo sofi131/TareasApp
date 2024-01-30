@@ -2,7 +2,8 @@ import com.ceica.Controladores.LoginController;
 import com.ceica.Controladores.TareasController;
 
 import java.util.Scanner;
-
+//habrá que poner si quieres entrar como admin o como usuario
+// y a partir de ahí hacer un menú de administrador y otro de usuario.
 public class Main {
     public static void main(String[] args) {
         String usr,pass;
@@ -29,5 +30,7 @@ public class Main {
 
     private static void menuPrincipalTareas(Scanner leer, TareasController tareas) {
         //esto ya se hará luego
+        //si eres el usuario puedes hacer un crud de tus tareas: ver tarea, crearla, editarla o eliminarla.
+        //el admin también puede hacer crud y ver las tareas de todos los usuarios.
     }
 }
