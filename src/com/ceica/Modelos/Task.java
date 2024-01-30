@@ -10,15 +10,15 @@ public class Task extends ModeloBase {
     private String description;
     private LocalDate datetime;
     private Date deadline;
-    //lo tenía como enum pero es mejor ponerlo como booleano
-    private Boolean status;
+    //creo su propia clase
+    private Status status;
 //constructor vacío
     public Task() {
     }
 
     //constructor lleno
 
-    public Task(int id, String title, String description, LocalDate datetime, Date deadline, Boolean status) {
+    public Task(int id, String title, String description, LocalDate datetime, Date deadline, Status status) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -26,7 +26,10 @@ public class Task extends ModeloBase {
         this.deadline = deadline;
         this.status = status;
     }
+
+
 //--------------------------------------------------get-------------------------------------
+
     public int getId() {
         return id;
     }
@@ -47,10 +50,11 @@ public class Task extends ModeloBase {
         return deadline;
     }
 
-    public Boolean getStatus() {
+    public Status getStatus() {
         return status;
     }
-//-------------------------------------------set--------------------------
+
+    //-------------------------------------------set--------------------------
     public void setId(int id) {
         this.id = id;
     }
@@ -71,7 +75,7 @@ public class Task extends ModeloBase {
         this.deadline = deadline;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
@@ -92,7 +96,7 @@ public class Task extends ModeloBase {
                 task.setDescription(respuesta.getString("nombre"));
                 task.setDatetime(respuesta.getDate("fecha"));
                 task.setDeadline(respuesta.getDate("fecha límite"));
-                task.setStatus(respuesta.getBoolean("estado"));
+                task.setStatus(Status.valueOf(respuesta.getString("status")));
                 taskList.add(task);
             }
 
@@ -130,5 +134,12 @@ public class Task extends ModeloBase {
     @Override
     protected Object createObjectFromResultSet(ResultSet resultSet) throws SQLException {
         return null;
+    }
+    public enum Status {
+        COMPLETADO,
+        NO_COMPLETADO
+        //Se pueden añadir más status si se necesitasen más (de momento solo estos dos)
+        //Tengo una clase enum solo para esto, no sé si aquí sirve solamente o no
+
     }
 }
