@@ -87,7 +87,6 @@ public abstract class ModeloBase {
         try (Connection conexion = DriverManager.getConnection(URL, USUARIO, PASSWORD);
              PreparedStatement preparedStatement = conexion.prepareStatement(sql);
              ResultSet resultSet = preparedStatement.executeQuery()) {
-
             while (resultSet.next()) {
                 Object obj = createObjectFromResultSet(resultSet);
                 resultList.add(obj);

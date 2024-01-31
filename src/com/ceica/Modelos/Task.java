@@ -5,24 +5,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Task extends ModeloBase {
-    private int id;
+    private int idtask;
     private String title;
     private String description;
-    private LocalDate datetime;
+    private Date create_time;
     private Date deadline;
     //creo su propia clase
-    private Status status;
+    private boolean status;
 //constructor vacío
     public Task() {
     }
 
     //constructor lleno
 
-    public Task(int id, String title, String description, LocalDate datetime, Date deadline, Status status) {
-        this.id = id;
+    public Task(int idtask, String title, String description, Date create_time, Date deadline, boolean status) {
+        this.idtask = idtask;
         this.title = title;
         this.description = description;
-        this.datetime = datetime;
+        this.create_time = create_time;
         this.deadline = deadline;
         this.status = status;
     }
@@ -30,8 +30,9 @@ public class Task extends ModeloBase {
 
 //--------------------------------------------------get-------------------------------------
 
-    public int getId() {
-        return id;
+
+    public int getIdtask() {
+        return idtask;
     }
 
     public String getTitle() {
@@ -42,21 +43,23 @@ public class Task extends ModeloBase {
         return description;
     }
 
-    public LocalDate getDatetime() {
-        return datetime;
+    public Date getCreate_time() {
+        return create_time;
     }
 
     public Date getDeadline() {
         return deadline;
     }
 
-    public Status getStatus() {
+    public boolean isStatus() {
         return status;
     }
 
     //-------------------------------------------set--------------------------
-    public void setId(int id) {
-        this.id = id;
+
+
+    public void setIdtask(int idtask) {
+        this.idtask = idtask;
     }
 
     public void setTitle(String title) {
@@ -67,18 +70,17 @@ public class Task extends ModeloBase {
         this.description = description;
     }
 
-    public void setDatetime(LocalDate datetime) {
-        this.datetime = datetime;
+    public void setCreate_time(Date create_time) {
+        this.create_time = create_time;
     }
 
     public void setDeadline(Date deadline) {
         this.deadline = deadline;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
-
 
     //------------Conexión a tasks //devuelve lista tasks y añade-------------------
     //cambiar LocalDate
@@ -91,7 +93,7 @@ public class Task extends ModeloBase {
             ResultSet respuesta = stm.executeQuery(sql);
             while (respuesta.next()) {
                 Task task= new Task();
-                task.setId(respuesta.getInt("idProveedor"));
+                task.setIdtask(respuesta.getInt("idProveedor"));
                 task.setTitle(respuesta.getString("cif"));
                 task.setDescription(respuesta.getString("nombre"));
                 task.setDatetime(respuesta.getDate("fecha"));

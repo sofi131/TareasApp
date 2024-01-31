@@ -4,39 +4,43 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Rol extends ModeloBase {
-    private String admin;
-    private String usuario;
+    private int idrol;
+    private String description;
 
     public Rol() {
     }
 
-    public Rol(String admin, String usuario) {
-        this.admin = admin;
-        this.usuario = usuario;
+    public Rol(int idrol, String description) {
+        this.idrol = idrol;
+        this.description = description;
     }
 
     //---------------------------------------getter y setter--------------------------
-    public String getAdmin() {
-        return admin;
+
+    public int getIdrol() {
+        return idrol;
     }
 
-    public String getUsuario() {
-        return usuario;
+    public String getDescription() {
+        return description;
     }
 
-    public void setAdmin(String admin) {
-        this.admin = admin;
+    public void setIdrol(int idrol) {
+        this.idrol = idrol;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setDescription(String description) {
+        this.description = description;
     }
-//-----------------------------------toString--------------------------------
+
+    //-----------------------------------toString--------------------------------
+
+
     @Override
     public String toString() {
         return "Rol{" +
-                "admin='" + admin + '\'' +
-                ", usuario='" + usuario + '\'' +
+                "idrol=" + idrol +
+                ", description='" + description + '\'' +
                 '}';
     }
 
@@ -47,9 +51,9 @@ public class Rol extends ModeloBase {
 
     @Override
     protected Object createObjectFromResultSet(ResultSet resultSet) throws SQLException {
-        String admin = resultSet.getString("admin");
-        String usuario = resultSet.getString("usuario");
-        //o devuelve o admin o usuario
-        return new Rol(admin, usuario);
+//        String admin = resultSet.getString("admin");
+//        String usuario = resultSet.getString("usuario");
+//        //o devuelve o admin o usuario
+//        return new Rol(admin, usuario);
     }
 }
