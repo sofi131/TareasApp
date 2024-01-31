@@ -1,4 +1,4 @@
-Aplicación para la Gestión de Tareas </br>
+**Aplicación para la Gestión de Tareas** </br>
 Se trata de realizar una aplicación donde los usuarios puedan crear/ver/editar/borrar tareas.</br>
 Cada usuario tendrá un username, password y un rol. Habrá una tabla de Roles (con idrol y perfil (user , admin)) y una tabla de Tareas (Task) con id, title,description,datetime,deadline,status. </br>
 
