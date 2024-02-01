@@ -1,6 +1,4 @@
-package com.ceica.Controladores;
-
-import com.ceica.Modelos.User;
+package com.ceica.Controllers;
 
 public class LoginController {
 //    public static boolean login(String usuario,String password){

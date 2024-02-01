@@ -1,15 +1,13 @@
-package com.ceica.Modelos;
+package com.ceica.Models;
 
-import java.lang.reflect.Method;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public abstract class ModeloBase {
+public abstract class ModelBase {
     private static final String CONFIG_FILE = "config.properties";
     protected static String URL;
     protected static String USUARIO;
@@ -65,9 +63,9 @@ public abstract class ModeloBase {
             }
 
             // Ejecutar la consulta
-            if (preparedStatement.executeUpdate() > 0) {
+            if(preparedStatement.executeUpdate()>0){
                 return true;
-            } else {
+            }else {
                 return false;
             }
 
@@ -87,6 +85,7 @@ public abstract class ModeloBase {
         try (Connection conexion = DriverManager.getConnection(URL, USUARIO, PASSWORD);
              PreparedStatement preparedStatement = conexion.prepareStatement(sql);
              ResultSet resultSet = preparedStatement.executeQuery()) {
+
             while (resultSet.next()) {
                 Object obj = createObjectFromResultSet(resultSet);
                 resultList.add(obj);
@@ -98,5 +97,4 @@ public abstract class ModeloBase {
 
         return resultList;
     }
-
 }

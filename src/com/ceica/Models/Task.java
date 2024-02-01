@@ -1,10 +1,7 @@
-package com.ceica.Modelos;
+package com.ceica.Models;
 import java.sql.*;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
-public class Task extends ModeloBase {
+public class Task extends ModelBase {
     private int idtask;
     private String title;
     private String description;
@@ -26,11 +23,7 @@ public class Task extends ModeloBase {
         this.deadline = deadline;
         this.status = status;
     }
-
-
 //--------------------------------------------------get-------------------------------------
-
-
     public int getIdtask() {
         return idtask;
     }
@@ -56,8 +49,6 @@ public class Task extends ModeloBase {
     }
 
     //-------------------------------------------set--------------------------
-
-
     public void setIdtask(int idtask) {
         this.idtask = idtask;
     }
@@ -82,47 +73,14 @@ public class Task extends ModeloBase {
         this.status = status;
     }
 
-    //------------Conexión a tasks //devuelve lista tasks y añade-------------------
-    //cambiar LocalDate
-    public static List<Task> getProveedores() {
-        List<Task> taskList = new ArrayList<>();
-        Connection conn = bbdd.Conexion.conectar();
-        String sql = "select * from proveedores";
-        try {
-            Statement stm = conn.createStatement();
-            ResultSet respuesta = stm.executeQuery(sql);
-            while (respuesta.next()) {
-                Task task= new Task();
-                task.setIdtask(respuesta.getInt("idProveedor"));
-                task.setTitle(respuesta.getString("cif"));
-                task.setDescription(respuesta.getString("nombre"));
-                task.setDatetime(respuesta.getDate("fecha"));
-                task.setDeadline(respuesta.getDate("fecha límite"));
-                task.setStatus(Status.valueOf(respuesta.getString("status")));
-                taskList.add(task);
-            }
-
-        } catch (SQLException e) {
-            //throw new RuntimeException(e);
-
-            return taskList;
-        }
-        try {
-            conn.close();
-        } catch (SQLException e) {
-            //throw new RuntimeException(e);
-        }
-        return taskList;
-    }
-
 //-------------------------------------toString-------------------------------
     @Override
     public String toString() {
         return "Task{" +
-                "id=" + id +
+                "idtask=" + idtask +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", datetime=" + datetime +
+                ", create_time=" + create_time +
                 ", deadline=" + deadline +
                 ", status=" + status +
                 '}';
@@ -130,7 +88,8 @@ public class Task extends ModeloBase {
 
     @Override
     protected String getNombreTabla() {
-        return "task";
+       // return "task";
+        return null;
     }
 
     @Override

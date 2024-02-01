@@ -1,9 +1,9 @@
-package com.ceica.Modelos;
+package com.ceica.Models;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Rol extends ModeloBase {
+public class Rol extends ModelBase {
     private int idrol;
     private String description;
 
@@ -46,7 +46,8 @@ public class Rol extends ModeloBase {
 
     @Override
     protected String getNombreTabla() {
-        return "rol"; //en vez de un valor nulo devuelve el rol del usuario
+        //return "rol"; //en vez de un valor nulo devuelve el rol del usuario
+        return null;
     }
 
     @Override
@@ -55,5 +56,6 @@ public class Rol extends ModeloBase {
 //        String usuario = resultSet.getString("usuario");
 //        //o devuelve o admin o usuario
 //        return new Rol(admin, usuario);
+        return null;
     }
 }
