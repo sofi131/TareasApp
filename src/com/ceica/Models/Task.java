@@ -92,15 +92,4 @@ public class Task extends ModeloBase {
         return null;
     }
 
-//    @Override
-//    protected Object createObjectFromResultSet(ResultSet resultSet) throws SQLException {
-//        return null;
-//    }
-//    public enum Status {
-//        COMPLETADO,
-//        NO_COMPLETADO
-//        //Se pueden añadir más status si se necesitasen más (de momento solo estos dos)
-//        //Tengo una clase enum solo para esto, no sé si aquí sirve solamente o no
-//
-//    }
 }
