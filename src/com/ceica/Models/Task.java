@@ -1,7 +1,7 @@
 package com.ceica.Models;
 import java.sql.*;
 
-public class Task extends ModelBase {
+public class Task extends ModeloBase {
     private int idtask;
     private String title;
     private String description;

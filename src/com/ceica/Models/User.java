@@ -6,7 +6,7 @@ import java.sql.SQLException;
 //Seguramente haya que poner varios admines...
 
 
-public class User extends ModelBase{
+public class User extends ModeloBase {
     private int iduser;
     private String username;
     private String password;
@@ -34,6 +34,11 @@ public class User extends ModelBase{
                 ", password='" + password + '\'' +
                 ", rol=" + rol +
                 '}';
+    }
+//creado a partir de TaskController
+    public User login(String username, String password) {
+        String sql="select iduser,username,idrol,description from"
+                + "user left join rol on user.idrol=rol.idrol";
     }
 }
 

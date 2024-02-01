@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public abstract class ModelBase {
+public abstract class ModeloBase {
     private static final String CONFIG_FILE = "config.properties";
     protected static String URL;
     protected static String USUARIO;
@@ -36,10 +36,8 @@ public abstract class ModelBase {
     // Métodos para CRUD
 
     public boolean insertar(String sql, Object... parametros) {
-
         sql = "insert into " + getNombreTabla() + " " + sql;
         return ejecutarQuery(sql, parametros);
-
     }
 
     public boolean actualizar(String sql, Object... parametros) {
@@ -75,6 +73,27 @@ public abstract class ModelBase {
         }
     }
 
+    //devuelve la lista de registros de la consulta que he ejecutado --> resulset
+
+    // Método genérico para ejecutar consultas SELECT
+    protected List<Object> ejecutarQuerySelect(String sql,Object ...parametros) {
+        try (Connection conexion = DriverManager.getConnection(URL, USUARIO, PASSWORD);
+             PreparedStatement preparedStatement = conexion.prepareStatement(sql)) {
+            // Establecer los valores de los parámetros
+            for (int i = 0; i < parametros.length; i++) {
+                preparedStatement.setObject(i + 1, parametros[i]);
+            }
+            ResultSet resultSet=preparedStatement.executeQuery();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            //return false;
+        }
+    }
+
+
+
+//ESTO NO VALE.....
     protected abstract Object createObjectFromResultSet(ResultSet resultSet) throws SQLException;
 
     protected List<Object> leerTodos() {
@@ -94,7 +113,6 @@ public abstract class ModelBase {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return resultList;
     }
 }

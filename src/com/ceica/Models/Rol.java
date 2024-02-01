@@ -3,7 +3,7 @@ package com.ceica.Models;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Rol extends ModelBase {
+public class Rol extends ModeloBase {
     private int idrol;
     private String description;
 
