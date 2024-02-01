@@ -14,6 +14,37 @@ public class User extends ModeloBase{
     public User() {
     }
 
+    public int getIduser() {
+        return iduser;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setIduser(int iduser) {
+        this.iduser = iduser;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
 
     @Override
     protected String getNombreTabla() {
@@ -30,7 +61,7 @@ public class User extends ModeloBase{
                 ", rol=" + rol +
                 '}';
     }
-    //creado a partir de TaskController
+
     public User login(String username, String password) {
         User user=new User();
         Connection conn=user.getConnection();
@@ -56,6 +87,7 @@ public class User extends ModeloBase{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
 
     }
 }
