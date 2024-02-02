@@ -9,6 +9,8 @@ public class TaskController {
     //usuario logueado
     public User userLogged;
 
+
+
     //ver que user está logueado
     public boolean login (String username, String password){
 
@@ -42,27 +44,22 @@ public class TaskController {
     }
 
     //borrar tarea
-    public boolean deleteTask(int idtask){
-        Task task=new Task();
-        task.borrar("DELETE FROM task WHERE idtask=?",idtask);
-        return true;
+    public boolean deleteTask(String title) {
+        Task task = new Task();
+       return task.borrar("title = ? and iduser=?", title, userLogged.getIduser());
+        /*return true;*/
     }
-//admin -> todas las tareas de todos los usuarios
+
+    //admin -> todas las tareas de todos los usuarios
     public List<Task> getAllTaskByUser(){
         Task task=new Task();
         return task.getAll();
     }
 
-
-
-
-
-
-
-//    public List<Task> getAllTask(){
-//        Task task=new Task();
-//        return task.getAll();
-//    }
+    public List<Task> getAllTask(){
+        Task task=new Task();
+        return task.getAll();
+    }
 
 
 
