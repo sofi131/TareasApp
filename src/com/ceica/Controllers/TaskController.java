@@ -35,11 +35,29 @@ public class TaskController {
         task.insertar("(title, description, deadline, iduser) values (?,?,?,?)", title,description,deadline,userLogged.getIduser());
         return true;
     }
+//Actualizar tarea (modificarla)
+    public boolean completeTask(int idtask){
+        Task task=new Task();
+        return task.actualizar("status=1 where idtask=?", idtask); // se puede poner true
+    }
 
+    //borrar tarea
+    public boolean deleteTask(int idtask){
+        Task task=new Task();
+        task.borrar("DELETE FROM task WHERE idtask=?",idtask);
+        return true;
+    }
+//admin -> todas las tareas de todos los usuarios
     public List<Task> getAllTaskByUser(){
         Task task=new Task();
-        return task.getAllByUser(userLogged.getIduser());
+        return task.getAll();
     }
+
+
+
+
+
+
 
 //    public List<Task> getAllTask(){
 //        Task task=new Task();

@@ -9,8 +9,8 @@ public class Task extends ModeloBase {
     private String description;
     private Date create_time;
     private Date deadline;
-    //creo su propia clase
     private boolean status;
+    //creo su propia clase
     private User user;
 //constructor vacío
     public Task() {
@@ -26,7 +26,7 @@ public class Task extends ModeloBase {
         this.deadline = deadline;
         this.status = status;
     }
-
+//-----------------------------------------getter & setter-------------------------------
     public int getIdtask() {
         return idtask;
     }
@@ -100,31 +100,32 @@ public class Task extends ModeloBase {
     protected String getNombreTabla() {
        return "task";
     }
-
+//ponemos task1 porque sino se repite
     public List<Task> getAllByUser(int iduser) {
         List<Task> taskList=new ArrayList<>();
-        Task task=new Task();
-        Connection conn= task.getConnection();
-        String sql="select idtask, title, T0.description,create_date,deadline,status,\n" +
-                "T1.iduser,username,T2.idrol,T2.description as rol\n" +
-                "from task T0\n" +
+        Task task1=new Task();
+        Connection conn=task1.getConnection();
+        String sql="SELECT idtask,title,T0.description,create_date,deadline,status,\n" +
+                "T1.iduser,username,T2.idrol,T2.description as rol \n" +
+                "from task T0 \n" +
                 "left join user T1 on T0.iduser=T1.iduser\n" +
                 "left join rol T2 on T1.idrol=T2.idrol where T1.iduser=?";
         try {
-            PreparedStatement pst = conn.prepareStatement(sql);
+            PreparedStatement pst=conn.prepareStatement(sql);
             pst.setInt(1,iduser);
-            ResultSet resultSet= pst.executeQuery();
-            while(resultSet.next()){
+            ResultSet resultSet=pst.executeQuery();
+            while (resultSet.next()){
+                Task task=new Task();
                 task.idtask=resultSet.getInt("idtask");
                 task.title=resultSet.getString("title");
                 task.description=resultSet.getString("description");
                 task.create_time=resultSet.getDate("create_date");
                 task.deadline=resultSet.getDate("deadline");
                 task.status=resultSet.getBoolean("status");
-                User user = new User();
+                User user=new User();
                 user.setIduser(resultSet.getInt("iduser"));
                 user.setUsername(resultSet.getString("username"));
-                Rol rol = new Rol();
+                Rol rol=new Rol();
                 rol.setIdrol(resultSet.getInt("idrol"));
                 rol.setDescription(resultSet.getString("rol"));
                 user.setRol(rol);
@@ -136,6 +137,40 @@ public class Task extends ModeloBase {
         }
         return taskList;
     }
-
-
+//ver todas las tareas (admin)
+    public List<Task> getAll() {
+        List<Task> taskList=new ArrayList<>();
+        Task task1=new Task();
+        Connection conn=task1.getConnection();
+        String sql="SELECT idtask,title,T0.description,create_date,deadline,status,\n" +
+                "T1.iduser,username,T2.idrol,T2.description as rol \n" +
+                "from task T0 \n" +
+                "left join user T1 on T0.iduser=T1.iduser\n" +
+                "left join rol T2 on T1.idrol=T2.idrol where T1.iduser=?";
+        try {
+            Statement st=conn.createStatement();
+            ResultSet resultSet=st.executeQuery(sql);
+            while (resultSet.next()){
+                Task task=new Task();
+                task.idtask=resultSet.getInt("idtask");
+                task.title=resultSet.getString("title");
+                task.description=resultSet.getString("description");
+                task.create_time=resultSet.getDate("create_date");
+                task.deadline=resultSet.getDate("deadline");
+                task.status=resultSet.getBoolean("status");
+                User user=new User();
+                user.setIduser(resultSet.getInt("iduser"));
+                user.setUsername(resultSet.getString("username"));
+                Rol rol=new Rol();
+                rol.setIdrol(resultSet.getInt("idrol"));
+                rol.setDescription(resultSet.getString("rol"));
+                user.setRol(rol);
+                task.setUser(user);
+                taskList.add(task);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return taskList;
+    }
 }
